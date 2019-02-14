@@ -1,1 +1,1 @@
-# accademy-backend
+# academy-backend
