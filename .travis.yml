@@ -18,4 +18,4 @@ script:
   ./mvnw clean install
 
 after_script:
-  - ./cc-test-reporter after-build -t jacoco --exit-code -r $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build -t jacoco --exit-code $TRAVIS_TEST_RESULT
