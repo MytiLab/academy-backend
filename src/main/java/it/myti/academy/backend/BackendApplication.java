@@ -1,4 +1,4 @@
-package it.myti.accademy.backend;
+package it.myti.academy.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

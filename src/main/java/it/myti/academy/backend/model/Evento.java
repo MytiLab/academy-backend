@@ -1,4 +1,4 @@
-package it.myti.accademy.backend.model;
+package it.myti.academy.backend.model;
 
 import lombok.Data;
 
@@ -29,7 +29,7 @@ import java.util.Date;
         discriminatorType = DiscriminatorType.INTEGER,
         name = "evento_tipo_dettaglio"
 )
-public class Evento {
+public abstract class Evento {
 
     @Id
     @Column(updatable = false)

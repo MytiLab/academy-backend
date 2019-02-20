@@ -1,4 +1,4 @@
-package it.myti.accademy.backend.model;
+package it.myti.academy.backend.model;
 
 import lombok.Data;
 

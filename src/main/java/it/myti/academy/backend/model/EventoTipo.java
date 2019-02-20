@@ -1,4 +1,4 @@
-package it.myti.accademy.backend.model;
+package it.myti.academy.backend.model;
 
 import lombok.Data;
 
@@ -16,8 +16,8 @@ import java.util.List;
  */
 @Data
 @Entity
-@Table(name = "utenti")
-public class Utente {
+@Table(name = "tipologie_eventi")
+public class EventoTipo {
 
     @Id
     @Column(updatable = false)
@@ -25,16 +25,11 @@ public class Utente {
     protected Long id;
 
     @Column(unique = true, length = 64)
-    protected String username;
-
-    @Column(unique = true, length = 64)
-    protected String password;
-
-    @Column(length = 64, nullable = false)
     protected String nome;
 
-    @Column
-    @OneToMany(mappedBy = "utente")
-    protected List<Collo> spedizioniFatte;
+    @Column(length = 2048)
+    protected String descrizione;
 
+    @OneToMany(mappedBy = "tipo")
+    protected List<Evento> eventi;
 }
