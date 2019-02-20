@@ -1,4 +1,4 @@
-package it.myti.accademy.backend.model;
+package it.myti.academy.backend.model;
 
 import lombok.Data;
 
@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
@@ -16,23 +15,26 @@ import java.util.List;
  * Created by david at 2019-02-13
  */
 @Data
-@Entity()
-@Table(name = "stati_unita_logistiche")
-public class StatoUnitaLogistica {
+@Entity
+@Table(name = "utenti")
+public class Utente {
 
     @Id
     @Column(updatable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
 
-    @Column(unique = true, length = 128)
+    @Column(unique = true, length = 64)
+    protected String username;
+
+    @Column(unique = true, length = 64)
+    protected String password;
+
+    @Column(length = 64, nullable = false)
     protected String nome;
 
-
-    @Column(length = 2048)
-    protected String descrizione;
-
-    @OneToMany(mappedBy = "stato")
-    protected List<UnitaLogistica> unitaLogistiche;
+    @Column
+    @OneToMany(mappedBy = "utente")
+    protected List<Collo> spedizioniFatte;
 
 }
