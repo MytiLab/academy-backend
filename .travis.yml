@@ -2,21 +2,11 @@ env:
   global:
     - CC_TEST_REPORTER_ID=19cd4efa77fdc8ca82e9308787980d32ec2282b88cd4d6f91d00528790b7fa09
 
-language: java
-jdk: oraclejdk8
-
 cache:
   directories:
     - $HOME/.m2
 
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-
-script:
-  ./mvnw clean install
-
-after_script:
-  - ./cc-test-reporter format-coverage -d -t jacoco ./target/jacoco-ut/jacoco.xml
-  - ./cc-test-reporter upload-coverage -d
+language: java
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+jdk: oraclejdk8
