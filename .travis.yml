@@ -10,3 +10,11 @@ language: java
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 jdk: oraclejdk8
+
+deploy:
+  provider: releases
+  api_key: "GITHUB OAUTH TOKEN"
+  file: "artifact-id.jar"
+  skip_cleanup: true
+  on:
+    tags: true
