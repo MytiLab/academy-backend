@@ -6,6 +6,9 @@ cache:
   directories:
     - $HOME/.m2
 
+before_install:
+  - sudo apt-get install -y tree
+
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
@@ -15,8 +18,18 @@ language: java
 after_success:
   - bash <(curl -s https://codecov.io/bash)
   - ./cc-test-reporter after-build -t jacoco -p $HOME/target/jacoco-ut -d --exit-code $TRAVIS_TEST_RESULT
+  - pwd
+  - tree -L 3
 jdk: oraclejdk8
 
 notifications:
   slack: mytiacademy:GZcP81eKbrGfmX7TJazsZwAr
     on_success: always
+
+deploy:
+  provider: releases
+  api_key: c58b5e2570e43d7e2a930bd15fe81a9a9cf6c727
+  file: $HOME/target/*.jar
+  skip_cleanup: true
+  on:
+    tags: true
