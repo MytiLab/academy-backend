@@ -17,10 +17,13 @@ before_script:
 language: java
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - JACOCO_SOURCE_PATH=src/main/java
   - cp target/jacoco-ut/jacoco.xml ./jacoco.xml
-  - ./cc-test-reporter after-build -t jacoco -d --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter format-coverage -t jacoco -d --exit-code $TRAVIS_TEST_RESULT
   - pwd
   - tree -L 3
+  - ./cc-test-reporter format-coverage -t jacoco target/jacoco-ut/jacoco.xml
+  - ./cc-test-reporter upload-coverage
 jdk: oraclejdk8
 
 deploy:
