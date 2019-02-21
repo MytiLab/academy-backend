@@ -14,5 +14,5 @@ before_script:
 language: java
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - ./cc-test-reporter after-build -t jacoco -p $HOME/target/jacoco-ut --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build -t jacoco -p $HOME/target/jacoco-ut -d --exit-code $TRAVIS_TEST_RESULT
 jdk: oraclejdk8
