@@ -10,3 +10,11 @@ language: java
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 jdk: oraclejdk8
+
+deploy:
+  provider: releases
+  api_key: "75cd6e216084c73b3468202d64196dd72c675a82"
+  file: "$HOME/target/artifact-id.jar"
+  skip_cleanup: true
+  on:
+    tags: false
