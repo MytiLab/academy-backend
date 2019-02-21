@@ -1,3 +1,6 @@
+before_install:
+  - sudo apt-get install -y tree
+
 env:
   global:
     - CC_TEST_REPORTER_ID=19cd4efa77fdc8ca82e9308787980d32ec2282b88cd4d6f91d00528790b7fa09
@@ -5,9 +8,6 @@ env:
 cache:
   directories:
     - $HOME/.m2
-
-before_install:
-  - sudo apt-get install -y tree
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
