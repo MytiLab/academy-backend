@@ -12,6 +12,7 @@ deploy:
   provider: releases
   api_key:
     secure: i7t+YD5DDk98jp73Aft1J2Prit8iPO7JFSThpz9snTS9EwFYVnA4NMs/+T2pI4OWHEUkP+o3I3HSK87shXmsygzJghMsOk6mibXCpIWRrPbSsmRPNy9cfLbtTyMmXgc1CRPQEMCilnlNZJK6lXXysZk7eEozx0ptjH+Kuh9rEJWD9HA58Pn9h4r/R+iKaMU7fcQzrewl9S5sWoXjNt6Bw9Pq9MJEOaU0GD1VSrJbqXwenXl8afgYAt1u5N6kLzrtCkW0R8OKu45h+Ee49rwqSEi+8wMzOyPRKb5N5DbDBhRRABzqHiFf2lI3ArmpZkvBG1o9WVvg1Hf+vx1pFUk9b+OKRcTEF56cxvUrjI+glKib4tkdloWQE+OcotIGLAkSJ7wek7u6CeTyutRu0GaF97Sts0Ad2W44WZGpeuLZWqwpGuVxZpb8C6KEBbJUI5PtSKYDwgjXiQk7aQ4pGyUs0iee7xy/7MP/wQaPOUHyfG611Bfow3rE1DnVAKaPLSBODFOGdgFuH63lufG2NodJb1/nxlFzPB6aFnZ6we1VtVFBWfRRgpSL8XrfQys/f1QEkHmMBz4cR+iwyE7H5PpitgDvCEFxddqc6DIF+Dp7oosGE8azVVa3iy8Pl9AEuqOfhbB3j4xY4mWYbbQCI1oi2hlby2ijpJdqUo/tmd04Ukg=
-  file: "$HOME/target/artifact-id"
+  file: "$HOME/target/backend*.jar"
   on:
     repo: tetofonta/academy-backend
+    tags: true
