@@ -6,6 +6,9 @@ cache:
   directories:
     - $HOME/.m2
 
+before_install:
+  - sudo apt-get install -y tree
+
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
@@ -18,10 +21,6 @@ after_success:
   - pwd
   - tree -L 3
 jdk: oraclejdk8
-
-notifications:
-  slack: mytiacademy:GZcP81eKbrGfmX7TJazsZwAr
-    on_success: always
 
 deploy:
   provider: releases
