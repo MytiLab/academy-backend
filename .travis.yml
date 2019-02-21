@@ -19,6 +19,10 @@ after_success:
   - tree -L 3
 jdk: oraclejdk8
 
+notifications:
+  slack: mytiacademy:GZcP81eKbrGfmX7TJazsZwAr
+    on_success: always
+
 deploy:
   provider: releases
   api_key: c58b5e2570e43d7e2a930bd15fe81a9a9cf6c727
