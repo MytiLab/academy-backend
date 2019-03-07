@@ -6,6 +6,9 @@ cache:
   directories:
     - $HOME/.m2
 
+before_install:
+  - sudo apt-get install -y tree
+
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
@@ -14,7 +17,19 @@ before_script:
 language: java
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - JACOCO_SOURCE_PATH=src/main/java
+  - cp target/jacoco-ut/jacoco.xml ./jacoco.xml
+  - ./cc-test-reporter format-coverage -t jacoco -d --exit-code $TRAVIS_TEST_RESULT
+  - pwd
+  - tree -L 3
+  - ./cc-test-reporter format-coverage -t jacoco target/jacoco-ut/jacoco.xml
+  - ./cc-test-reporter upload-coverage
 jdk: oraclejdk8
 
-
+deploy:
+  provider: releases
+  api_key: c58b5e2570e43d7e2a930bd15fe81a9a9cf6c727
+  file: $HOME/target/*.jar
+  skip_cleanup: true
+  on:
+    tags: true
