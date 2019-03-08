@@ -34,3 +34,8 @@ deploy:
   on:
     repo: tetofonta/academy-backend
     tags: true
+
+notifications:
+  slack:
+    rooms:
+      - capitanovvio:OzupfbOHX15vJW4vJE1TOIA9#general

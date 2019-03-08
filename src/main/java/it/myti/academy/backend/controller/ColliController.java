@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by david at 2019-03-07
  */
-@RestController("/collo")
+@RestController
 public class ColliController {
 
     @Autowired
@@ -23,14 +23,13 @@ public class ColliController {
     @Autowired
     UtenteRepository utenteRepository;
 
-    @GetMapping("/utente/{id}")
+    @GetMapping("/colli/utente/{id}")
     public List<Collo> getByUtente(@PathVariable("id") long id) {
         List<Collo> returnValue = null;
 
         final Utente utente = utenteRepository.findById(id).get();
-        if(utente!=null) {
+        if (utente != null)
             returnValue = colloService.getSpedizioniAttiveByUtente(utente);
-        }
 
         return returnValue;
     }

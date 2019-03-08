@@ -19,7 +19,7 @@ VALUES ( 1, 'AAAA', 'UL2', 12, -12, 1);
 
 INSERT INTO spedizioni (`id`, `codice_treno`, `partenza_il`, `partenza_da`, `arrivo_il`, `arrivo_a`)
 VALUES
-(1, 'TRAIN_AAAA', '2019-02-01', 'BRESCIA', '2019-02-03', 'MILANO');
+(1, 'TRAIN_AAAA', '2019-02-01', 'BRESCIA', '2020-02-03', 'MILANO');
 
 INSERT INTO colli (`id`, `unita_logistica_id`, `spedizione_id`, `utente_id`)
 VALUES ( 1,  1, 1, 1);

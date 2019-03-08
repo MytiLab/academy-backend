@@ -25,16 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(HelloWorldController.class)
 public class HelloWorldControllerTest {
 
-    @TestConfiguration
-    static class EmployeeServiceImplTestContextConfiguration {
-
-        @Bean
-        public HelloWorldService employeeService() {
-            return new HelloWorldServiceImpl();
-        }
-    }
-
-
     @Autowired //2
     private MockMvc mockMvc;
 
@@ -59,5 +49,14 @@ public class HelloWorldControllerTest {
         mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
                 .andExpect(content().string(expected));
+    }
+
+    @TestConfiguration
+    static class EmployeeServiceImplTestContextConfiguration {
+
+        @Bean
+        public HelloWorldService employeeService() {
+            return new HelloWorldServiceImpl();
+        }
     }
 }

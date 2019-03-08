@@ -5,5 +5,6 @@ package it.myti.academy.backend.service;
  */
 public interface HelloWorldService {
     String sayHello();
+
     String sayHello(String who);
 }

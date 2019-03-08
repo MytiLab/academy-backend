@@ -1,9 +1,9 @@
 package it.myti.academy.backend.service.impl;
 
+import it.myti.academy.backend.model.Collo;
 import it.myti.academy.backend.model.Utente;
 import it.myti.academy.backend.repository.ColloRepository;
 import it.myti.academy.backend.service.ColloService;
-import it.myti.academy.backend.model.Collo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
