@@ -1,5 +1,6 @@
 package it.myti.academy.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class UnitaLogistica {
 
     @ManyToOne
     @JoinColumn(name = "stato_id")
+    @JsonBackReference
     protected StatoUnitaLogistica stato;
 
     @Column

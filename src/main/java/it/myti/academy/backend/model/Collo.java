@@ -1,5 +1,6 @@
 package it.myti.academy.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,14 +21,17 @@ public class Collo {
 
     @ManyToOne
     @JoinColumn(name = "unita_logistica_id")
+    @JsonBackReference
     protected UnitaLogistica unitaLogistica;
 
     @ManyToOne
     @JoinColumn(name = "spedizione_id")
+    @JsonBackReference
     protected Spedizione spedizione;
 
     @ManyToOne
     @JoinColumn(name = "utente_id")
+    @JsonBackReference
     protected Utente utente;
 
     @Column

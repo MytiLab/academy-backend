@@ -1,6 +1,7 @@
 package it.myti.academy.backend.controller;
 
 import it.myti.academy.backend.model.UnitaLogistica;
+import it.myti.academy.backend.model.UnitaLogisticaDettaglio;
 import it.myti.academy.backend.model.Utente;
 import it.myti.academy.backend.repository.UnitaLogisticaRepository;
 import it.myti.academy.backend.repository.UtenteRepository;
@@ -33,8 +34,8 @@ public class UnitaLogisticheController {
     }
 
     @GetMapping("/unitalogistiche/{id}")
-    public UnitaLogistica getById(@PathVariable("id") long id) {
-        return ulr.findById(id).get();
+    public UnitaLogisticaDettaglio getById(@PathVariable("id") long id) {
+        return uls.getUnitaLogisticaDetail(id);
     }
 
 }
