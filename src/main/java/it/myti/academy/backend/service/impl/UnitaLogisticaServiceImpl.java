@@ -1,8 +1,6 @@
 package it.myti.academy.backend.service.impl;
 
-import it.myti.academy.backend.model.UnitaLogistica;
-import it.myti.academy.backend.model.UnitaLogisticaDettaglio;
-import it.myti.academy.backend.model.Utente;
+import it.myti.academy.backend.model.*;
 import it.myti.academy.backend.repository.ColloRepository;
 import it.myti.academy.backend.repository.UnitaLogisticaRepository;
 import it.myti.academy.backend.service.ColloService;
@@ -26,12 +24,50 @@ public class UnitaLogisticaServiceImpl implements UnitaLogisticaService {
     @Override
     public List<UnitaLogistica> getUnitaLogisticheInViaggioByUtente(Utente utente) {
         return colli.getSpedizioniAttiveByUtente(utente).stream()
-                .map(collo -> collo.getUnitaLogistica())
+                .map(Collo::getUnitaLogistica)
                 .collect(Collectors.toList());
     }
 
+    @Override
     public UnitaLogisticaDettaglio getUnitaLogisticaDetail(Long id) {
         UnitaLogistica element = ulr.findById(id).get();
-         return new UnitaLogisticaDettaglio(element);
+        EventoParticle e = this.getLatestEvento(element);
+         return new UnitaLogisticaDettaglio(
+                 element.getSpedizioniFatte()
+                    .stream()
+                    .filter(collo -> collo.getSpedizione().getArrivoIl().after(new Date()))
+                    .map(collo -> collo.getContenuti())
+                    .flatMap(x -> x.stream())
+                    .collect(Collectors.toList()),
+                 element.getId(),
+                 element.getCodice(),
+                 element.getStato(),
+                 e.getTemperatura(),
+                 e.getUmidita(),
+                 e.getLatitudine().toString(),
+                 e.getLongitudine().toString(),
+                 this.getSpedizioneCorrente(element)
+         );
+    }
+
+    @Override
+    public Spedizione getSpedizioneCorrente(UnitaLogistica u){
+        return ulr.findById(u.getId()).get().getSpedizioniFatte()
+                .stream()
+                .filter(collo -> collo.getSpedizione().getArrivoIl().after(new Date()))
+                .map(Collo::getSpedizione)
+                .findFirst().get();
+    }
+
+    @Override
+    public EventoParticle getLatestEvento(UnitaLogistica u){
+        return (EventoParticle) u.getSpedizioniFatte()
+                .stream()
+                .filter(collo -> collo.getSpedizione().getArrivoIl().after(new Date()))
+                .map(collo -> collo.getEventi()
+                        .stream()
+                        .filter(element -> element instanceof EventoParticle)
+                        .max((a, b) -> a.getRicevutoIl().compareTo(b.getRicevutoIl())).get()
+                ).findFirst().get();
     }
 }

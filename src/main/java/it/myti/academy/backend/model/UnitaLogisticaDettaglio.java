@@ -1,26 +1,81 @@
 package it.myti.academy.backend.model;
 
+import it.myti.academy.backend.repository.EventoRepository;
+import it.myti.academy.backend.service.UnitaLogisticaService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UnitaLogisticaDettaglio extends UnitaLogistica {
+public class UnitaLogisticaDettaglio {
 
-    protected List<Collo> contenuto;
+    private List<Contenuto> contenuto;
+    private Long id;
+    private String nome;
+    private StatoUnitaLogistica stato;
+    private Double temperatura;
+    private Double umidita;
+    private String longitudine;
+    private String latitudine;
+    private Spedizione spedizione;
 
-    public UnitaLogisticaDettaglio(UnitaLogistica dettagli) {
-        this.id = dettagli.id;
-        this.codice = dettagli.codice;
-        this.idEsterno = dettagli.idEsterno;
-        this.temperatureMassima = dettagli.temperatureMassima;
-        this.temperaturaMinima = dettagli.temperaturaMinima;
-        this.stato = dettagli.stato;
-        this.spedizioniFatte = dettagli.spedizioniFatte;
-        this.contenuto = dettagli.getSpedizioniFatte().stream().filter(collo -> collo.getSpedizione().getArrivoIl().after(new Date())).collect(Collectors.toList());
+    public UnitaLogisticaDettaglio(
+            List<Contenuto> contenuto,
+            Long id,
+            String nome,
+            StatoUnitaLogistica stato,
+            Double temperatura,
+            Double umidita,
+            String longitudine,
+            String latitudine,
+            Spedizione spedizione
+    ) {
+        this.contenuto = contenuto;
+        this.id = id;
+        this.nome = nome;
+        this.stato = stato;
+        this.temperatura = temperatura;
+        this.umidita = umidita;
+        this.longitudine = longitudine;
+        this.latitudine = latitudine;
+        this.spedizione = spedizione;
     }
 
-    public List<Collo> getContenuto() {
+    public List<Contenuto> getContenuto() {
         return contenuto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public StatoUnitaLogistica getStato() {
+        return stato;
+    }
+
+    public Double getTemperatura() {
+        return temperatura;
+    }
+
+    public Double getUmidita() {
+        return umidita;
+    }
+
+    public String getLongitudine() {
+        return longitudine;
+    }
+
+    public String getLatitudine() {
+        return latitudine;
+    }
+
+    public Spedizione getSpedizione() {
+        return spedizione;
     }
 
 }
