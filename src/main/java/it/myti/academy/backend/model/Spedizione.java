@@ -1,5 +1,6 @@
 package it.myti.academy.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -44,6 +45,7 @@ public class Spedizione {
     @Column(name = "arrivo_a", nullable = false)
     protected String arrivoA;
 
+    @JsonBackReference
     @Column
     @OneToMany(mappedBy = "spedizione")
     protected List<Collo> colliInviati;
