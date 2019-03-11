@@ -1,5 +1,6 @@
 package it.myti.academy.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -39,10 +40,11 @@ public class Contenuto {
     @Column(scale = 2)
     protected Double quantita;
 
-    @Column(length = 2)
+    @Column(length = 2, name = "unita_di_misura")
     protected String unitaDiMisura;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "collo_id")
     protected Collo collo;
 }

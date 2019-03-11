@@ -19,7 +19,7 @@ VALUES ( 1, 'AAAA', 'UL2', 12, -12, 1);
 
 INSERT INTO spedizioni (`id`, `codice_treno`, `partenza_il`, `partenza_da`, `arrivo_il`, `arrivo_a`)
 VALUES
-(1, 'TRAIN_AAAA', '2019-02-01', 'BRESCIA', '2019-02-03', 'MILANO');
+(1, 'TRAIN_AAAA', '2019-02-01', 'BRESCIA', '2019-05-03', 'MILANO');
 
 INSERT INTO colli (`id`, `unita_logistica_id`, `spedizione_id`, `utente_id`)
 VALUES ( 1,  1, 1, 1);
@@ -43,3 +43,8 @@ VALUES
       (4, 2.56, 80.8, 0, 45.556556, 10.216596, 100),
       (5, 2.82, 80.3, 0, 45.556556, 10.216596, 100),
       (6, 2.93, 79.9, 0, 45.556556, 10.216596, 100);
+
+INSERT INTO contenuti (`id`, `nome`, `descrizione`, `temperatura_minima_ricchiesta`, `temperatura_massima_ricchiesta`, `quantita`, `unita_di_misura`, `collo_id`)
+VALUES
+      (1, 'CAVOLO CAPPUCCIO', 'Detto anche verza', 2, 5, 10, 'kg', 1),
+      (2, 'STRACCHINO', 'Detto anche robbiola', 2, 3, 20, 'kg', 1);

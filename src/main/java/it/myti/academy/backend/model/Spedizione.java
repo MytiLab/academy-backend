@@ -1,5 +1,6 @@
 package it.myti.academy.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -45,6 +46,7 @@ public class Spedizione {
     protected String arrivoA;
 
     @Column
+    @JsonIgnore
     @OneToMany(mappedBy = "spedizione")
     protected List<Collo> colliInviati;
 

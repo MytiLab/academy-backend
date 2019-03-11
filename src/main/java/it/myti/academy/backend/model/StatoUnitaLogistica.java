@@ -1,5 +1,6 @@
 package it.myti.academy.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -31,6 +32,7 @@ public class StatoUnitaLogistica {
     @Column(length = 2048)
     protected String descrizione;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "stato")
     protected List<UnitaLogistica> unitaLogistiche;
 
