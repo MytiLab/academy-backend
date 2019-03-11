@@ -1,5 +1,6 @@
 package it.myti.academy.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -45,6 +46,7 @@ public abstract class Evento {
     protected EventoTipo tipo;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "collo_id")
     protected Collo collo;
 

@@ -1,5 +1,6 @@
 package it.myti.academy.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -43,6 +44,7 @@ public class Collo {
     protected List<Contenuto> contenuti;
 
     @Column
+    @JsonIgnore
     @OneToMany(mappedBy = "collo")
     protected List<Evento> eventi;
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -26,6 +27,7 @@ public class UnitaLogisticheController {
 
     @Autowired
     public EventiParticleRepository eventiParticleRepository;
+    private Function<Collo, UnitaLogisticheDettaglio> colloToDetail;
 
     @GetMapping("/unitalogistiche/utente/{id}")
     public List<UnitaLogisticheDettaglio> getDettagliByUtente(@PathVariable("id") long id) {
@@ -33,22 +35,39 @@ public class UnitaLogisticheController {
         final List<Collo> spedizioniAttiveByUtente = colloService.getSpedizioniAttiveByUtente(id);
 
         final List<UnitaLogisticheDettaglio> collect = spedizioniAttiveByUtente.stream()
-                .map(c -> {
-                    UnitaLogisticheDettaglio dettaglio = new UnitaLogisticheDettaglio();
-                    final UnitaLogistica unitaLogistica = c.getUnitaLogistica();
-                    dettaglio.setId(unitaLogistica.getId());
-                    dettaglio.setNome(unitaLogistica.getCodice());
-                    dettaglio.setStatus(unitaLogistica.getStato());
-                    final EventoParticle lastEvent = eventiParticleRepository.findFirstByOrderByRicevutoIlDesc();
-                    dettaglio.fillByEventoParticle(lastEvent);
-                    dettaglio.setSpedizione(c.getSpedizione());
-                    dettaglio.setContenuto(c.getContenuti());
-                    return dettaglio;
-                })
+                .map(c -> colloToDetails(c))
                 .collect(Collectors.toList());
 
         return collect;
 
+    }
+
+    @GetMapping("/unitalogistiche/{unitaLoguisticheId}/utente/{utenteId}")
+    public List<UnitaLogisticheDettaglio> getDettagliByUtente(@PathVariable("unitaLoguisticheId") long unitaLoguisticheId,
+                                                              @PathVariable("utenteId") long utenteId) {
+
+        final List<Collo> spedizioniAttiveByUtente = colloService.getSpedizioniAttiveByUtente(utenteId);
+
+        final List<UnitaLogisticheDettaglio> collect = spedizioniAttiveByUtente.stream()
+                .filter(c -> c.getUnitaLogistica().getId().equals(unitaLoguisticheId))
+                .map(c -> colloToDetails(c))
+                .collect(Collectors.toList());
+
+        return collect;
+
+    }
+
+    private UnitaLogisticheDettaglio colloToDetails(Collo c) {
+        UnitaLogisticheDettaglio dettaglio = new UnitaLogisticheDettaglio();
+        final UnitaLogistica unitaLogistica = c.getUnitaLogistica();
+        dettaglio.setId(unitaLogistica.getId());
+        dettaglio.setNome(unitaLogistica.getCodice());
+        dettaglio.setStatus(unitaLogistica.getStato());
+        final EventoParticle lastEvent = eventiParticleRepository.findFirstByOrderByRicevutoIlDesc();
+        dettaglio.fillByEventoParticle(lastEvent);
+        dettaglio.setSpedizione(c.getSpedizione());
+        dettaglio.setContenuto(c.getContenuti());
+        return dettaglio;
     }
 
 }
