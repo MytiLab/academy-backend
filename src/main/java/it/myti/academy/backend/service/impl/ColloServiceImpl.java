@@ -1,6 +1,9 @@
 package it.myti.academy.backend.service.impl;
 
+import it.myti.academy.backend.model.UnitaLogistica;
 import it.myti.academy.backend.model.Utente;
+import it.myti.academy.backend.model.errori.ColloNonTrovatoException;
+import it.myti.academy.backend.model.errori.SpedizioniAttiveNonTrovateException;
 import it.myti.academy.backend.repository.ColloRepository;
 import it.myti.academy.backend.service.ColloService;
 import it.myti.academy.backend.model.Collo;
@@ -20,10 +23,24 @@ public class ColloServiceImpl implements ColloService {
     private ColloRepository colloRepository;
 
     @Override
-    public List<Collo> getSpedizioniAttiveByUtente(Utente utente) {
+    public List<Collo> getSpedizioniAttiveByUtente(Utente utente) throws SpedizioniAttiveNonTrovateException {
         final List<Collo> allByUtente = colloRepository.findAllByUtente(utente);
-        return allByUtente.stream()
+        List<Collo> risultato = allByUtente.stream()
                 .filter(collo -> collo.getSpedizione().getArrivoIl().after(new Date()))
                 .collect(Collectors.toList());
+        if(risultato.size() == 0)
+            throw new SpedizioniAttiveNonTrovateException();
+        return risultato;
+    }
+
+    public Collo getSpedizioneAttivaByUtenteAndUnitaLogistica(Utente utente, UnitaLogistica unitaLogistica) throws SpedizioniAttiveNonTrovateException {
+        final List<Collo> colliUtenteUnitaLogistica = colloRepository.findAllByUtenteAndUnitaLogistica(utente, unitaLogistica);
+        List<Collo> SpedizioniAttive = colliUtenteUnitaLogistica.stream()
+                .filter(collo -> collo.getSpedizione().getArrivoIl().after(new Date()))
+                .collect(Collectors.toList());
+        if(SpedizioniAttive.size() == 0)
+            throw  new SpedizioniAttiveNonTrovateException();
+        return SpedizioniAttive.get(0);
+
     }
 }

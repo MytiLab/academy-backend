@@ -1,4 +1,4 @@
-package it.myti.academy.backend.model.dettagli;
+package it.myti.academy.backend.model.entitaRisposte;
 
 import it.myti.academy.backend.model.Contenuto;
 import it.myti.academy.backend.model.Spedizione;
