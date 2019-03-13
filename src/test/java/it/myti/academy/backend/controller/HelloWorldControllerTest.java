@@ -53,7 +53,6 @@ public class HelloWorldControllerTest {
 
     @TestConfiguration
     static class EmployeeServiceImplTestContextConfiguration {
-
         @Bean
         public HelloWorldService employeeService() {
             return new HelloWorldServiceImpl();

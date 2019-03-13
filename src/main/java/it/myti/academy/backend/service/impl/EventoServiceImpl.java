@@ -10,6 +10,7 @@ import it.myti.academy.backend.service.UnitaLogisticaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,10 +28,10 @@ public class EventoServiceImpl implements EventoService {
     public List<Evento> getEventiByUtente(Utente utente, Long idSpedizione, Long idUL) {
         final List<Collo> allByUtente = colli.findAllByUtente(utente);
         return allByUtente.stream()
-                .filter(collo -> idSpedizione == null ? true : collo.getSpedizione().getId() == idSpedizione)
-                .filter(collo -> idUL == null ? true : collo.getUnitaLogistica().getId() == idUL)
-                .map(collo -> collo.getEventi())
-                .flatMap(x -> x.stream())
+                .filter(collo -> idSpedizione == null || collo.getSpedizione().getId().equals(idSpedizione))
+                .filter(collo -> idUL == null || collo.getUnitaLogistica().getId().equals(idUL))
+                .map(Collo::getEventi)
+                .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
 

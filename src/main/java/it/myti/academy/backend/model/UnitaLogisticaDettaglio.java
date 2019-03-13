@@ -19,8 +19,10 @@ public class UnitaLogisticaDettaglio {
     private String longitudine;
     private String latitudine;
     private Spedizione spedizione;
+    public UnitaLogistica ref;
 
     public UnitaLogisticaDettaglio(
+            UnitaLogistica ref,
             List<Contenuto> contenuto,
             Long id,
             String nome,
@@ -31,6 +33,7 @@ public class UnitaLogisticaDettaglio {
             String latitudine,
             Spedizione spedizione
     ) {
+        this.ref = ref;
         this.contenuto = contenuto;
         this.id = id;
         this.nome = nome;

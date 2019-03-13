@@ -15,7 +15,7 @@ import java.util.List;
  * Created by david at 2019-03-07
  */
 @RestController
-public class ColliController {
+public class ColliControllerTest {
 
     @Autowired
     ColloService colloService;

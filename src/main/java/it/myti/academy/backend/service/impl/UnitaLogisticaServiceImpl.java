@@ -33,6 +33,7 @@ public class UnitaLogisticaServiceImpl implements UnitaLogisticaService {
         UnitaLogistica element = ulr.findById(id).get();
         EventoParticle e = this.getLatestEvento(element);
          return new UnitaLogisticaDettaglio(
+                 element,
                  element.getSpedizioniFatte()
                     .stream()
                     .filter(collo -> collo.getSpedizione().getArrivoIl().after(new Date()))
