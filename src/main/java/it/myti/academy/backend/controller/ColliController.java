@@ -15,13 +15,17 @@ import java.util.List;
  * Created by david at 2019-03-07
  */
 @RestController
-public class ColliControllerTest {
+public class ColliController {
+
+    private final ColloService colloService;
+
+    private final UtenteRepository utenteRepository;
 
     @Autowired
-    ColloService colloService;
-
-    @Autowired
-    UtenteRepository utenteRepository;
+    public ColliController(ColloService colloService, UtenteRepository utenteRepository) {
+        this.colloService = colloService;
+        this.utenteRepository = utenteRepository;
+    }
 
     @GetMapping("/colli/utente/{id}")
     public List<Collo> getByUtente(@PathVariable("id") long id) {

@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 public class UnitaLogisticaServiceImplTest {
 
     @TestConfiguration
-    static class ___ {
+    static class __ {
         @Bean
         public ColloService collo_init() {
             return new ColloServiceImpl();

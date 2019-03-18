@@ -16,8 +16,13 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ColloServiceImpl implements ColloService {
+
+    private final ColloRepository colloRepository;
+
     @Autowired
-    private ColloRepository colloRepository;
+    public ColloServiceImpl(ColloRepository colloRepository) {
+        this.colloRepository = colloRepository;
+    }
 
     @Override
     public List<Collo> getSpedizioniAttiveByUtente(Utente utente) {

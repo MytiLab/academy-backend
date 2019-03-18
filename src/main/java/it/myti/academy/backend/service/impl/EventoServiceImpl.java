@@ -18,11 +18,12 @@ import java.util.stream.Collectors;
 @Service
 public class EventoServiceImpl implements EventoService {
 
-    @Autowired
-    EventoRepository eventi;
+    private final ColloRepository colli;
 
     @Autowired
-    ColloRepository colli;
+    public EventoServiceImpl(ColloRepository colli) {
+        this.colli = colli;
+    }
 
     @Override
     public List<Evento> getEventiByUtente(Utente utente, Long idSpedizione, Long idUL) {

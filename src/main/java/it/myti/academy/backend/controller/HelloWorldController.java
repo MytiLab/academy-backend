@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloWorldController {
 
-    private HelloWorldService helloWorldService;
+    private final HelloWorldService helloWorldService;
 
     @Autowired
     public HelloWorldController(HelloWorldService helloWorldService) {

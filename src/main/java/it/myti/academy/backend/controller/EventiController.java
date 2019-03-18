@@ -21,11 +21,14 @@ import java.util.Map;
 @RestController
 public class EventiController {
 
-    @Autowired
-    UtenteRepository utenteRepository;
+    private final UtenteRepository utenteRepository;
+    private final EventoService eventi;
 
     @Autowired
-    EventoService eventi;
+    public EventiController(UtenteRepository utenteRepository, EventoService eventi) {
+        this.utenteRepository = utenteRepository;
+        this.eventi = eventi;
+    }
 
     @GetMapping("/eventi/utente/{id}")
     public List<Evento> getByUtente(@PathVariable("id") long id, @RequestParam Map<String,String> params) {

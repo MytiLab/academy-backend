@@ -16,14 +16,14 @@ import java.util.List;
 @RestController
 public class UnitaLogisticheController {
 
-    @Autowired
-    UtenteRepository utenteRepository;
+    private final UtenteRepository utenteRepository;
+    private final UnitaLogisticaService uls;
 
     @Autowired
-    UnitaLogisticaService uls;
-
-    @Autowired
-    UnitaLogisticaRepository ulr;
+    public UnitaLogisticheController(UtenteRepository utenteRepository, UnitaLogisticaService uls) {
+        this.utenteRepository = utenteRepository;
+        this.uls = uls;
+    }
 
     @GetMapping("/unitalogistiche/utente/{id}")
     public List<UnitaLogistica> getByUtente(@PathVariable("id") long id) {

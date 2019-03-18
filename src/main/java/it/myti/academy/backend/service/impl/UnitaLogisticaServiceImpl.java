@@ -15,11 +15,14 @@ import java.util.stream.Collectors;
 @Service
 public class UnitaLogisticaServiceImpl implements UnitaLogisticaService {
 
-    @Autowired
-    ColloService colli;
+    private final ColloService colli;
+    private final UnitaLogisticaRepository ulr;
 
     @Autowired
-    UnitaLogisticaRepository ulr;
+    public UnitaLogisticaServiceImpl(ColloService colli, UnitaLogisticaRepository ulr) {
+        this.colli = colli;
+        this.ulr = ulr;
+    }
 
     @Override
     public List<UnitaLogistica> getUnitaLogisticheInViaggioByUtente(Utente utente) {

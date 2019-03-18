@@ -1,5 +1,6 @@
 package it.myti.academy.backend;
 
+import it.myti.academy.backend.service.impl.ColloServiceImplTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
