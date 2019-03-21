@@ -12,6 +12,4 @@ public interface EventiParticleRepository extends JpaRepository<EventoParticle, 
 
     EventoParticle findFirstByOrderByRicevutoIlDesc();
 
-    List<EventoParticle> findAllByTempertura(Double temperatura);
-
 }
