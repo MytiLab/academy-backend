@@ -21,7 +21,7 @@ public class Utente {
     @Column(unique = true, length = 64)
     protected String username;
 
-    @Column(unique = true, length = 64)
+    @Column(length = 64)
     protected String password;
 
     @Column(length = 64, nullable = false)

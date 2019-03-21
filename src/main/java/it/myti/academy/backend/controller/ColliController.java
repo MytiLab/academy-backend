@@ -5,9 +5,7 @@ import it.myti.academy.backend.model.Utente;
 import it.myti.academy.backend.repository.UtenteRepository;
 import it.myti.academy.backend.service.ColloService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,6 +13,7 @@ import java.util.List;
  * Created by david at 2019-03-07
  */
 @RestController
+@RequestMapping("/colli")
 public class ColliController {
 
     private final ColloService colloService;
@@ -27,7 +26,7 @@ public class ColliController {
         this.utenteRepository = utenteRepository;
     }
 
-    @GetMapping("/colli/utente/{id}")
+    @GetMapping("/utente/{id}")
     public List<Collo> getByUtente(@PathVariable("id") long id) {
         List<Collo> returnValue = null;
 

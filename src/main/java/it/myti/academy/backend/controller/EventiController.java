@@ -10,15 +10,13 @@ import it.myti.academy.backend.repository.UtenteRepository;
 import it.myti.academy.backend.service.EventoService;
 import it.myti.academy.backend.service.UnitaLogisticaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/eventi")
 public class EventiController {
 
     private final UtenteRepository utenteRepository;
@@ -30,7 +28,7 @@ public class EventiController {
         this.eventi = eventi;
     }
 
-    @GetMapping("/eventi/utente/{id}")
+    @GetMapping("/utente/{id}")
     public List<Evento> getByUtente(@PathVariable("id") long id, @RequestParam Map<String,String> params) {
         final Utente utente = utenteRepository.findById(id).get();
         if (utente != null) {

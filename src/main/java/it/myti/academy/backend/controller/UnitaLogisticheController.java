@@ -8,11 +8,13 @@ import it.myti.academy.backend.service.UnitaLogisticaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/unitalogistiche")
 public class UnitaLogisticheController {
 
     private final UtenteRepository utenteRepository;
@@ -24,7 +26,7 @@ public class UnitaLogisticheController {
         this.uls = uls;
     }
 
-    @GetMapping("/unitalogistiche/utente/{id}")
+    @GetMapping("/utente/{id}")
     public List<UnitaLogistica> getByUtente(@PathVariable("id") long id){
         final Utente utente = utenteRepository.findById(id).get();
         if (utente != null)
@@ -32,7 +34,7 @@ public class UnitaLogisticheController {
         return null;
     }
 
-    @GetMapping("/unitalogistiche/{id}")
+    @GetMapping("/{id}")
     public UnitaLogisticaDettaglio getById(@PathVariable("id") long id) {
         return uls.getUnitaLogisticaDetail(id);
     }
