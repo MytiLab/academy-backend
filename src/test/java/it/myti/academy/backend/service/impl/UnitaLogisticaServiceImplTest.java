@@ -1,6 +1,9 @@
 package it.myti.academy.backend.service.impl;
 
-import it.myti.academy.backend.model.*;
+import it.myti.academy.backend.model.Evento;
+import it.myti.academy.backend.model.Spedizione;
+import it.myti.academy.backend.model.UnitaLogistica;
+import it.myti.academy.backend.model.Utente;
 import it.myti.academy.backend.model.resp.UnitaLogisticaDettaglio;
 import it.myti.academy.backend.repository.ColloRepository;
 import it.myti.academy.backend.repository.UnitaLogisticaRepository;
@@ -24,32 +27,8 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 public class UnitaLogisticaServiceImplTest {
 
-    @TestConfiguration
-    static class __ {
-
-        private final ColloRepository collo;
-        private final UnitaLogisticaRepository ulr;
-
-        @Autowired
-        public __(ColloRepository collo, UnitaLogisticaRepository ulr){
-            this.collo = collo;
-            this.ulr = ulr;
-        }
-
-        @Bean
-        public ColloService collo_init() {
-            return new ColloServiceImpl(collo);
-        }
-
-        @Bean
-        public UnitaLogisticaService ul_init() {
-            return new UnitaLogisticaServiceImpl(collo_init(), ulr);
-        }
-    }
-
     @Autowired
     UtenteRepository utenti;
-
     @Autowired
     UnitaLogisticaService uls; //It says it's an error but it works ¯\_(ツ)_/¯
 
@@ -65,7 +44,7 @@ public class UnitaLogisticaServiceImplTest {
     }
 
     @Test
-    public void getUnitaLogisticaDetail(){
+    public void getUnitaLogisticaDetail() {
         UnitaLogisticaDettaglio ul = uls.getUnitaLogisticaDetail(1L);
         assertNotNull(ul);
 
@@ -73,7 +52,7 @@ public class UnitaLogisticaServiceImplTest {
     }
 
     @Test
-    public void getSpedizioneCorrente(){
+    public void getSpedizioneCorrente() {
         UnitaLogisticaDettaglio ul = uls.getUnitaLogisticaDetail(1L);
         Spedizione s = uls.getSpedizioneCorrente(ul.ref);
         assertNotNull(s);
@@ -81,9 +60,32 @@ public class UnitaLogisticaServiceImplTest {
     }
 
     @Test
-    public void getLatestEvento(){
+    public void getLatestEvento() {
         UnitaLogisticaDettaglio ul = uls.getUnitaLogisticaDetail(1L);
         Evento e = uls.getLatestEvento(ul.ref);
         assertNotNull(e);
+    }
+
+    @TestConfiguration
+    static class __ {
+
+        private final ColloRepository collo;
+        private final UnitaLogisticaRepository ulr;
+
+        @Autowired
+        public __(ColloRepository collo, UnitaLogisticaRepository ulr) {
+            this.collo = collo;
+            this.ulr = ulr;
+        }
+
+        @Bean
+        public ColloService collo_init() {
+            return new ColloServiceImpl(collo);
+        }
+
+        @Bean
+        public UnitaLogisticaService ul_init() {
+            return new UnitaLogisticaServiceImpl(collo_init(), ulr);
+        }
     }
 }

@@ -1,17 +1,14 @@
 package it.myti.academy.backend.service.impl;
 
-import it.myti.academy.backend.model.*;
+import it.myti.academy.backend.model.Collo;
+import it.myti.academy.backend.model.Evento;
+import it.myti.academy.backend.model.Utente;
 import it.myti.academy.backend.repository.ColloRepository;
-import it.myti.academy.backend.repository.EventoRepository;
-import it.myti.academy.backend.repository.UnitaLogisticaRepository;
-import it.myti.academy.backend.service.ColloService;
 import it.myti.academy.backend.service.EventoService;
-import it.myti.academy.backend.service.UnitaLogisticaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 

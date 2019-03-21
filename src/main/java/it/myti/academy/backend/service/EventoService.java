@@ -1,6 +1,7 @@
 package it.myti.academy.backend.service;
 
-import it.myti.academy.backend.model.*;
+import it.myti.academy.backend.model.Evento;
+import it.myti.academy.backend.model.Utente;
 
 import java.util.List;
 

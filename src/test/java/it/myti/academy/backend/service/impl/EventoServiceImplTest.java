@@ -22,25 +22,8 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringRunner.class)
 public class EventoServiceImplTest {
 
-    @TestConfiguration
-    static class __ {
-
-        private final ColloRepository collo;
-
-        @Autowired
-        public __(ColloRepository collo){
-            this.collo = collo;
-        }
-
-        @Bean
-        public EventoService init() {
-            return new EventoServiceImpl(collo);
-        }
-    }
-
     @Autowired
     UtenteRepository utenti;
-
     @Autowired
     EventoService eventi; //It says it's an error but it works ¯\_(ツ)_/¯
 
@@ -53,5 +36,21 @@ public class EventoServiceImplTest {
         assertFalse(evt.isEmpty());
 
         //TODO: Check contenuto
+    }
+
+    @TestConfiguration
+    static class __ {
+
+        private final ColloRepository collo;
+
+        @Autowired
+        public __(ColloRepository collo) {
+            this.collo = collo;
+        }
+
+        @Bean
+        public EventoService init() {
+            return new EventoServiceImpl(collo);
+        }
     }
 }

@@ -8,5 +8,4 @@ public interface SecurityConstants {
     final static String TOKEN_PREFIX = "Bearer ";
     final static String HEADER_STRING = "Authorization";
     final static String SECRET = "this-is-a-secret";
-    final static String SIGN_UP_URL = "/utente/sign-up";
 }

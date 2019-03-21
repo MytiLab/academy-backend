@@ -4,16 +4,12 @@ import it.myti.academy.backend.model.Contenuto;
 import it.myti.academy.backend.model.Spedizione;
 import it.myti.academy.backend.model.StatoUnitaLogistica;
 import it.myti.academy.backend.model.UnitaLogistica;
-import it.myti.academy.backend.repository.EventoRepository;
-import it.myti.academy.backend.service.UnitaLogisticaService;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UnitaLogisticaDettaglio {
 
+    public UnitaLogistica ref;
     private List<Contenuto> contenuto;
     private Long id;
     private String nome;
@@ -23,7 +19,6 @@ public class UnitaLogisticaDettaglio {
     private String longitudine;
     private String latitudine;
     private Spedizione spedizione;
-    public UnitaLogistica ref;
 
     public UnitaLogisticaDettaglio(
             UnitaLogistica ref,

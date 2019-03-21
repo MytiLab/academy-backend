@@ -24,15 +24,15 @@ public class EventiController {
     }
 
     @GetMapping("/utente/{id}")
-    public List<Evento> getByUtente(@PathVariable("id") long id, @RequestParam Map<String,String> params) {
+    public List<Evento> getByUtente(@PathVariable("id") long id, @RequestParam Map<String, String> params) {
         final Utente utente = utenteRepository.findById(id).get();
         if (utente != null) {
             Long spedizione = null;
             Long ul = null;
-            try{
+            try {
                 spedizione = params.get("idSpedizione") != null ? Long.parseLong(params.get("idSpedizione")) : null;
                 ul = params.get("idUnitaLogistica") != null ? Long.parseLong(params.get("idUnitaLogistica")) : null;
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 spedizione = null;
                 ul = null;
             }

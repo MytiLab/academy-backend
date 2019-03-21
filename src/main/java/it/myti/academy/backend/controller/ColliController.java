@@ -5,7 +5,10 @@ import it.myti.academy.backend.model.Utente;
 import it.myti.academy.backend.repository.UtenteRepository;
 import it.myti.academy.backend.service.ColloService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 

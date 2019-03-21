@@ -10,5 +10,6 @@ import java.util.List;
  */
 public interface ColloService {
     List<Collo> getSpedizioniAttiveByUtente(Long utenteId);
+
     List<Collo> getSpedizioniAttiveByUtente(Utente utente);
 }
