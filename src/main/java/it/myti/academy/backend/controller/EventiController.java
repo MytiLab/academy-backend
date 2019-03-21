@@ -1,14 +1,9 @@
 package it.myti.academy.backend.controller;
 
 import it.myti.academy.backend.model.Evento;
-import it.myti.academy.backend.model.UnitaLogistica;
-import it.myti.academy.backend.model.UnitaLogisticaDettaglio;
 import it.myti.academy.backend.model.Utente;
-import it.myti.academy.backend.repository.EventoRepository;
-import it.myti.academy.backend.repository.UnitaLogisticaRepository;
 import it.myti.academy.backend.repository.UtenteRepository;
 import it.myti.academy.backend.service.EventoService;
-import it.myti.academy.backend.service.UnitaLogisticaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

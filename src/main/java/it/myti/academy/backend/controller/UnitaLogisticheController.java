@@ -1,7 +1,7 @@
 package it.myti.academy.backend.controller;
 
 import it.myti.academy.backend.model.UnitaLogistica;
-import it.myti.academy.backend.model.UnitaLogisticaDettaglio;
+import it.myti.academy.backend.model.resp.UnitaLogisticaDettaglio;
 import it.myti.academy.backend.model.Utente;
 import it.myti.academy.backend.repository.UtenteRepository;
 import it.myti.academy.backend.service.UnitaLogisticaService;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("/unitalogistiche")
 public class UnitaLogisticheController {

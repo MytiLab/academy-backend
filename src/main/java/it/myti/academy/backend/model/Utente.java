@@ -15,10 +15,10 @@ public class Utente {
 
     @Id
     @Column(updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @Column(unique = true, length = 64)
+    @Column(length = 64)
     protected String username;
 
     @Column(length = 64)

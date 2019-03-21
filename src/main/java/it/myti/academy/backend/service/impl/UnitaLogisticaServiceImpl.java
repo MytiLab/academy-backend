@@ -1,7 +1,7 @@
 package it.myti.academy.backend.service.impl;
 
 import it.myti.academy.backend.model.*;
-import it.myti.academy.backend.repository.ColloRepository;
+import it.myti.academy.backend.model.resp.UnitaLogisticaDettaglio;
 import it.myti.academy.backend.repository.UnitaLogisticaRepository;
 import it.myti.academy.backend.service.ColloService;
 import it.myti.academy.backend.service.UnitaLogisticaService;
