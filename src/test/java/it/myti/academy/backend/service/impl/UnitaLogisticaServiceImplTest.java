@@ -1,7 +1,9 @@
 package it.myti.academy.backend.service.impl;
 
 import it.myti.academy.backend.model.*;
+import it.myti.academy.backend.repository.ColloRepository;
 import it.myti.academy.backend.repository.EventoRepository;
+import it.myti.academy.backend.repository.UnitaLogisticaRepository;
 import it.myti.academy.backend.repository.UtenteRepository;
 import it.myti.academy.backend.service.ColloService;
 import it.myti.academy.backend.service.EventoService;
@@ -25,14 +27,24 @@ public class UnitaLogisticaServiceImplTest {
 
     @TestConfiguration
     static class __ {
+
+        private final ColloRepository collo;
+        private final UnitaLogisticaRepository ulr;
+
+        @Autowired
+        public __(ColloRepository collo, UnitaLogisticaRepository ulr){
+            this.collo = collo;
+            this.ulr = ulr;
+        }
+
         @Bean
         public ColloService collo_init() {
-            return new ColloServiceImpl();
+            return new ColloServiceImpl(collo);
         }
 
         @Bean
         public UnitaLogisticaService ul_init() {
-            return new UnitaLogisticaServiceImpl();
+            return new UnitaLogisticaServiceImpl(collo_init(), ulr);
         }
     }
 

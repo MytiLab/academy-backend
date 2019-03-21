@@ -3,7 +3,6 @@ package it.myti.academy.backend.controller;
 import it.myti.academy.backend.model.UnitaLogistica;
 import it.myti.academy.backend.model.UnitaLogisticaDettaglio;
 import it.myti.academy.backend.model.Utente;
-import it.myti.academy.backend.repository.UnitaLogisticaRepository;
 import it.myti.academy.backend.repository.UtenteRepository;
 import it.myti.academy.backend.service.UnitaLogisticaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class UnitaLogisticheController {
     }
 
     @GetMapping("/unitalogistiche/utente/{id}")
-    public List<UnitaLogistica> getByUtente(@PathVariable("id") long id) {
+    public List<UnitaLogistica> getByUtente(@PathVariable("id") long id){
         final Utente utente = utenteRepository.findById(id).get();
         if (utente != null)
             return uls.getUnitaLogisticheInViaggioByUtente(utente);

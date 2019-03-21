@@ -28,9 +28,17 @@ public class EventoServiceImplTest {
 
     @TestConfiguration
     static class __ {
+
+        private final ColloRepository collo;
+
+        @Autowired
+        public __(ColloRepository collo){
+            this.collo = collo;
+        }
+
         @Bean
         public EventoService init() {
-            return new EventoServiceImpl();
+            return new EventoServiceImpl(collo);
         }
     }
 
