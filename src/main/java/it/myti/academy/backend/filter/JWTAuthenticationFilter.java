@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import it.myti.academy.backend.model.Utente;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,7 +24,20 @@ import java.util.Date;
 /**
  * Created by david at 2019-03-20
  */
+@PropertySource("classpath:application.property")
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter implements SecurityConstants {
+
+    @Value("${jwt.expiration}")
+    private String EXPIRATION;
+
+    @Value("${jwt.token_prefix}")
+    private String TOKEN_PREFIX;
+
+    @Value("${jwt.header_string}")
+    private String HEADER_STRING;
+
+    @Value("${jwt.secret}")
+    private String SECRET;
 
     private AuthenticationManager authenticationManager;
 
@@ -53,7 +68,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             Authentication auth) throws IOException, ServletException {
         String token = Jwts.builder()
                 .setSubject(((User) auth.getPrincipal()).getUsername())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
