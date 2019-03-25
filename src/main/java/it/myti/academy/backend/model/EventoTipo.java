@@ -1,14 +1,9 @@
 package it.myti.academy.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -30,6 +25,7 @@ public class EventoTipo {
     @Column(length = 2048)
     protected String descrizione;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tipo")
     protected List<Evento> eventi;
 }
