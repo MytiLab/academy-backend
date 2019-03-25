@@ -28,8 +28,7 @@ public class EventiController {
     }
 
     @GetMapping("/")
-    @ResponseBody
-    public List<Evento> getByUtente(HttpServletRequest req, @RequestParam Map<String, String> params) {
+    public List<Evento> getByUtente(@RequestParam Map<String, String> params) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         final Utente utente = utenteRepository.findByUsername(username);
