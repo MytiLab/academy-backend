@@ -1,6 +1,7 @@
 package it.myti.academy.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -30,12 +31,12 @@ public abstract class Evento {
 
     @ManyToOne
     @JoinColumn(name = "evento_tipo_id")
-    @JsonBackReference
+    @JsonIgnore
     protected EventoTipo tipo;
 
     @ManyToOne
     @JoinColumn(name = "collo_id")
-    @JsonBackReference
+    @JsonIgnore
     protected Collo collo;
 
 }
