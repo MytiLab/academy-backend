@@ -5,8 +5,13 @@ import it.myti.academy.backend.model.Utente;
 import it.myti.academy.backend.repository.UtenteRepository;
 import it.myti.academy.backend.service.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -16,16 +21,18 @@ public class EventiController {
 
     private final UtenteRepository utenteRepository;
     private final EventoService eventi;
-
     @Autowired
     public EventiController(UtenteRepository utenteRepository, EventoService eventi) {
         this.utenteRepository = utenteRepository;
         this.eventi = eventi;
     }
 
-    @GetMapping("/utente/{id}")
-    public List<Evento> getByUtente(@PathVariable("id") long id, @RequestParam Map<String, String> params) {
-        final Utente utente = utenteRepository.findById(id).get();
+    @GetMapping("/")
+    @ResponseBody
+    public List<Evento> getByUtente(HttpServletRequest req, @RequestParam Map<String, String> params) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        final Utente utente = utenteRepository.findByUsername(username);
         if (utente != null) {
             Long spedizione = null;
             Long ul = null;

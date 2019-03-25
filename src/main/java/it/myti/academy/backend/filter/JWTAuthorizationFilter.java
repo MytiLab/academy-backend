@@ -1,6 +1,10 @@
 package it.myti.academy.backend.filter;
 
 import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +21,7 @@ import java.util.ArrayList;
  * Created by david at 2019-03-20
  */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter implements SecurityConstants {
+
     public JWTAuthorizationFilter(AuthenticationManager authManager) {
         super(authManager);
     }

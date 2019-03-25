@@ -24,20 +24,8 @@ import java.util.Date;
 /**
  * Created by david at 2019-03-20
  */
-@PropertySource("classpath:application.property")
+
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter implements SecurityConstants {
-
-    @Value("${jwt.expiration}")
-    private String EXPIRATION;
-
-    @Value("${jwt.token_prefix}")
-    private String TOKEN_PREFIX;
-
-    @Value("${jwt.header_string}")
-    private String HEADER_STRING;
-
-    @Value("${jwt.secret}")
-    private String SECRET;
 
     private AuthenticationManager authenticationManager;
 

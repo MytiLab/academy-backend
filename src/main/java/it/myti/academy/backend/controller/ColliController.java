@@ -5,6 +5,8 @@ import it.myti.academy.backend.model.Utente;
 import it.myti.academy.backend.repository.UtenteRepository;
 import it.myti.academy.backend.service.ColloService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,11 +31,14 @@ public class ColliController {
         this.utenteRepository = utenteRepository;
     }
 
-    @GetMapping("/utente/{id}")
-    public List<Collo> getByUtente(@PathVariable("id") long id) {
+    @GetMapping("/")
+    public List<Collo> getByUtente() {
         List<Collo> returnValue = null;
 
-        final Utente utente = utenteRepository.findById(id).get();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        final Utente utente = utenteRepository.findByUsername(username);
+
         if (utente != null)
             returnValue = colloService.getSpedizioniAttiveByUtente(utente);
 

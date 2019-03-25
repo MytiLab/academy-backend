@@ -6,6 +6,8 @@ import it.myti.academy.backend.model.resp.UnitaLogisticaDettaglio;
 import it.myti.academy.backend.repository.UtenteRepository;
 import it.myti.academy.backend.service.UnitaLogisticaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +28,12 @@ public class UnitaLogisticheController {
         this.uls = uls;
     }
 
-    @GetMapping("/utente/{id}")
-    public List<UnitaLogistica> getByUtente(@PathVariable("id") long id) {
-        final Utente utente = utenteRepository.findById(id).get();
+    @GetMapping("/")
+    public List<UnitaLogistica> getByUtente() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        final Utente utente = utenteRepository.findByUsername(username);
+
         if (utente != null)
             return uls.getUnitaLogisticheInViaggioByUtente(utente);
         return null;

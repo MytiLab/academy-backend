@@ -2,7 +2,6 @@ package it.myti.academy.backend.config;
 
 import it.myti.academy.backend.filter.JWTAuthenticationFilter;
 import it.myti.academy.backend.filter.JWTAuthorizationFilter;
-import it.myti.academy.backend.filter.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
@@ -18,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * Created by david at 2019-03-20
  */
 @EnableWebSecurity
-public class WebSecurity extends WebSecurityConfigurerAdapter implements SecurityConstants {
+public class WebSecurity extends WebSecurityConfigurerAdapter{
     private UserDetailsService userDetailsService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -32,7 +31,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter implements Securit
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/utenti/sign-up", "/unitalogistiche/utente/*").permitAll()
+                .antMatchers(HttpMethod.POST, "/utenti/sign-up", "/unitalogistiche/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
