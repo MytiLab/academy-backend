@@ -23,3 +23,6 @@
 /nbdist/
 /.nb-gradle/
 /build/
+!/src/test/resources/application.properties
+!/src/main/resources/application.properties
+!/mvn-repository-exported.zip

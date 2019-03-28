@@ -2,13 +2,7 @@ package it.myti.academy.backend.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -21,13 +15,13 @@ public class Utente {
 
     @Id
     @Column(updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @Column(unique = true, length = 64)
+    @Column(length = 64)
     protected String username;
 
-    @Column(unique = true, length = 64)
+    @Column(length = 64)
     protected String password;
 
     @Column(length = 64, nullable = false)

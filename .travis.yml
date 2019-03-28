@@ -1,14 +1,35 @@
 env:
   global:
-    - CC_TEST_REPORTER_ID=19cd4efa77fdc8ca82e9308787980d32ec2282b88cd4d6f91d00528790b7fa09
-
+  - CC_TEST_REPORTER_ID=19cd4efa77fdc8ca82e9308787980d32ec2282b88cd4d6f91d00528790b7fa09
 cache:
   directories:
-    - $HOME/.m2
-
+  - "$HOME/.m2"
+before_install:
+- sudo apt-get install -y tree
+before_script:
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- "./cc-test-reporter before-build"
 language: java
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash)
+- JACOCO_SOURCE_PATH=src/main/java
+- cp target/jacoco-ut/jacoco.xml ./jacoco.xml
+- "./cc-test-reporter format-coverage -t jacoco -d --exit-code $TRAVIS_TEST_RESULT"
+- pwd
+- tree -L 3
+- "./cc-test-reporter format-coverage -t jacoco target/jacoco-ut/jacoco.xml"
+- "./cc-test-reporter upload-coverage"
 jdk: oraclejdk8
-
-
+deploy:
+  provider: releases
+  api_key:
+    secure: Yw6wgyCZF0ypJzFtEF75g9iaMNKPduhZiwOjUUuhPBu+fTkQP1nukORGZCE4FPcEnBA3Hu8iN6V5KujPJWduId6mduWUDIfZJwVINmnjLmWtLSeY5rxcA61dzJ789I3l9gtxlmxu/LRlDfntTEW9MSOBvRRIoggE0Vv1MnUyYZZWSmDgwGcrjkTCAp/Cbk/Fg6/+4uD9GOYYX45vwvHFbtCSNgBriWDpxJ5EeBNvhwcP9mVpZ3Mn5JkFQ2Q0MbK6kV8cFYQe0qag6rABrVR181zCaAFejDoiaKHrV7Qr7CYCOCRT45g6Vh2fMnyt0Z4y1kPV2zu2X0GWf6ePn/LGQE0tU/+pJXVILly2yjdkbV8eMfkgHe/X19ruZpQTVQDD6fIKYqZkZo8z32Pz+s++FV0usYGWF6OOmrG+dK2pFLSuQtYZFYvPa+zoCKUuAw0uI9cH+er7SL6nz5wIv6lpofhKsmcYLAhDtqicoLYqlSazPpJ3JM1u0duRIdxBzCczodKNctpNEWHVzMCU2zaQtkjZi3AZBWRDq5Cq6nCOgN0w4O0U4Tys6npKbiLD+EYWIpd21LbB1wj8f2nDxrsW7cE2ViHRedwSkJCdYvvNTnZeabh3C6fAqyNxes5ZCTokxj8al784CQxDI06jw6Hj+i71MwFxZgekMD/1Oqr0RK0=
+  file: "$HOME/target/*.jar"
+  on:
+    repo: tetofonta/academy-backend
+notifications:
+  slack:
+    rooms:
+    - capitanovvio:OzupfbOHX15vJW4vJE1TOIA9#general
