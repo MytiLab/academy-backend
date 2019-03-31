@@ -2,10 +2,7 @@ package it.myti.academy.backend.service.impl;
 
 import it.myti.academy.backend.model.*;
 import it.myti.academy.backend.model.entitaRisposte.DettagliUnitaLogisticaUtente;
-import it.myti.academy.backend.model.errori.ColloNonTrovatoException;
-import it.myti.academy.backend.model.errori.SpedizioniAttiveNonTrovateException;
-import it.myti.academy.backend.model.errori.UnitaLogisticaNonTrovataException;
-import it.myti.academy.backend.model.errori.UtenteNonTrovatoException;
+import it.myti.academy.backend.model.errori.eccezioni.UtenteNonTrovatoException;
 import it.myti.academy.backend.repository.UnitaLogisticaRepository;
 import it.myti.academy.backend.service.ColloService;
 import it.myti.academy.backend.service.ContenutoService;
@@ -32,19 +29,17 @@ public class UnitaLogisticaServiceImpl implements UnitaLogisticaService {
     ContenutoService contenutoService;
 
 
-    public List<DettagliUnitaLogisticaUtente> getByUtente(Long idUtente) throws UnitaLogisticaNonTrovataException, UtenteNonTrovatoException, SpedizioniAttiveNonTrovateException {
+    public List<DettagliUnitaLogisticaUtente> getByUtente(Long idUtente) throws UtenteNonTrovatoException {
         Utente utente = utenteService.getById(idUtente);
         if(utente == null)
             throw new UtenteNonTrovatoException();
         List<Collo> colliUtente = colloService.getSpedizioniAttiveByUtente(utente);
-        if (colliUtente.isEmpty())
-            throw new UnitaLogisticaNonTrovataException();
         return colliUtente.stream().map(collo -> {
             return generaDettagliRichiestaUnitaByCollo(collo);
         }).collect(Collectors.toList());
     }
 
-    public DettagliUnitaLogisticaUtente getByIdAndUtente(Long idUnitaLogistica, Long idUtente) throws UtenteNonTrovatoException, SpedizioniAttiveNonTrovateException {
+    public DettagliUnitaLogisticaUtente getByIdAndUtente(Long idUnitaLogistica, Long idUtente) throws UtenteNonTrovatoException {
         Utente utente = utenteService.getById(idUtente);
         UnitaLogistica unitaLogistica = unitaLogisticaRepository.getById(idUnitaLogistica);
         Collo colloUtente = colloService.getSpedizioneAttivaByUtenteAndUnitaLogistica(utente, unitaLogistica);

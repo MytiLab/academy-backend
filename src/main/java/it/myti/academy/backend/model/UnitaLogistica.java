@@ -1,7 +1,5 @@
 package it.myti.academy.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -38,12 +36,10 @@ public class UnitaLogistica {
     @Column(name = "temp_minima")
     protected Short temperaturaMinima;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "stato_id")
     protected StatoUnitaLogistica stato;
 
-    @JsonBackReference
     @Column
     @OneToMany(mappedBy = "unitaLogistica")
     protected List<Collo> spedizioniFatte;

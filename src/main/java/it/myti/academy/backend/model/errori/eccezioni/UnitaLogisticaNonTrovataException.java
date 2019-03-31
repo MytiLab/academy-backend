@@ -1,4 +1,4 @@
-package it.myti.academy.backend.model.errori;
+package it.myti.academy.backend.model.errori.eccezioni;
 
 
 import org.springframework.http.HttpStatus;

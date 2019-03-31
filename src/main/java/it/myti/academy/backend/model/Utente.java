@@ -1,6 +1,5 @@
 package it.myti.academy.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -22,19 +21,18 @@ public class Utente {
 
     @Id
     @Column(updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     @Column(unique = true, length = 64)
     protected String username;
 
-    @Column(unique = true, length = 64)
+    @Column(length = 64)
     protected String password;
 
     @Column(length = 64, nullable = false)
     protected String nome;
 
-    @JsonBackReference
     @Column
     @OneToMany(mappedBy = "utente")
     protected List<Collo> spedizioniFatte;

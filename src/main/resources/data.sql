@@ -1,7 +1,9 @@
+
+
 INSERT INTO utenti (`id`, `username`, `password`, `nome`)
 VALUES
-  (1, 'logistic@galbanino.it', 'ciaociao123', 'Logistica Galbanino'),
-  (2, 'pippo@baudo.it', 'cfffiaociao123', 'Cocaina');
+  (1, 'logistic@galbanino.it', '$2a$10$E4xLUTPcVrQ6zGewW40twucl1sVesuZjAbH8dKTf4eb8KMsnmzxAu', 'Logistica Galbanino'),
+  (2, 'prova', '$2a$10$E4xLUTPcVrQ6zGewW40twucl1sVesuZjAbH8dKTf4eb8KMsnmzxAu', 'nome');
 
 INSERT INTO tipologie_eventi (`id`, `nome`, `descrizione`)
 VALUES
@@ -20,7 +22,7 @@ VALUES ( 1, 'AAAA', 'UL2', 12, -12, 1);
 
 INSERT INTO spedizioni (`id`, `codice_treno`, `partenza_il`, `partenza_da`, `arrivo_il`, `arrivo_a`)
 VALUES
-(1, 'TRAIN_AAAA', '2019-02-01', 'BRESCIA', '2019-09-03', 'MILANO');
+(1, 'TRAIN_AAAA', '2019-02-01', 'BRESCIA', '2019-05-03', 'MILANO');
 
 INSERT INTO colli (`id`, `unita_logistica_id`, `spedizione_id`, `utente_id`)
 VALUES ( 1,  1, 1, 1);
@@ -44,7 +46,8 @@ VALUES
       (4, 2.56, 80.8, 0, 45.556556, 10.216596, 100),
       (5, 2.82, 80.3, 0, 45.556556, 10.216596, 100),
       (6, 2.93, 79.9, 0, 45.556556, 10.216596, 100);
-INSERT INTO contenuti (`dtype`, `id`, `descrizione`, `nome`, `quantita`, `temperatura_massima_ricchiesta`, `temperatura_minima_ricchiesta`, `unita_di_misura`, `collo_id`)
+
+INSERT INTO contenuti (`DTYPE`, `id`, `nome`, `descrizione`, `temperatura_minima_ricchiesta`, `temperatura_massima_ricchiesta`, `quantita`, `unita_di_misura`, `collo_id`)
 VALUES
-       ('ContenutoDettagliato', 1, 'descrizione', 'mele', 20, 18, 10, 'kg', 1),
-       ('ContenutoDettagliato', 2, 'descrizione', 'pere', 30, 18, 10, 'kg', 1);
+      ('ContenutoCompleto', 1, 'CAVOLO CAPPUCCIO', 'Detto anche verza', 2, 5, 10, 'kg', 1),
+      ('ContenutoCompleto', 2, 'STRACCHINO', 'Detto anche robbiola', 2, 3, 20, 'kg', 1);

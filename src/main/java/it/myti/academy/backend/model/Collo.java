@@ -1,7 +1,6 @@
 package it.myti.academy.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -28,28 +27,24 @@ public class Collo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "unita_logistica_id")
     protected UnitaLogistica unitaLogistica;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "spedizione_id")
     protected Spedizione spedizione;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "utente_id")
     protected Utente utente;
 
-    @JsonBackReference
     @Column
     @OneToMany(mappedBy = "collo")
-    protected List<ContenutoCompleto> contenuti;
+    protected List<Contenuto> contenuti;
 
-    @JsonBackReference
     @Column
+    @JsonIgnore
     @OneToMany(mappedBy = "collo")
     protected List<Evento> eventi;
 

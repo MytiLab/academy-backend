@@ -1,17 +1,24 @@
 package it.myti.academy.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Created by david at 2019-02-13
  */
 @Data
 @Entity
-@Inheritance
 @Table(name = "contenuti")
-abstract public class Contenuto {
+public class Contenuto {
 
     @Id
     @Column(updatable = false)
@@ -33,6 +40,11 @@ abstract public class Contenuto {
     @Column(scale = 2)
     protected Double quantita;
 
-    @Column(length = 2)
+    @Column(length = 2, name = "unita_di_misura")
     protected String unitaDiMisura;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "collo_id")
+    protected Collo collo;
 }

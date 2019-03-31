@@ -1,6 +1,6 @@
 package it.myti.academy.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -41,13 +41,12 @@ public abstract class Evento {
     @Temporal(TemporalType.TIMESTAMP)
     protected Date ricevutoIl = new Date();
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "evento_tipo_id")
     protected EventoTipo tipo;
 
-    @JsonManagedReference
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "collo_id")
     protected Collo collo;
 
