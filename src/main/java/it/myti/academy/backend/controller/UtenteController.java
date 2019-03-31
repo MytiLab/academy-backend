@@ -21,7 +21,7 @@ public class UtenteController {
 
     @Autowired
     public UtenteController(UtenteRepository applicationUserRepository,
-                          BCryptPasswordEncoder bCryptPasswordEncoder) {
+                            BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.applicationUserRepository = applicationUserRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }

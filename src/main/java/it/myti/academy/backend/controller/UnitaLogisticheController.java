@@ -26,13 +26,10 @@ public class UnitaLogisticheController {
 
     @Autowired
     public ColloService colloService;
-
-
-    @Autowired
-    private UtenteRepository utenteRepository;
-
     @Autowired
     public EventiParticleRepository eventiParticleRepository;
+    @Autowired
+    private UtenteRepository utenteRepository;
 
     @GetMapping("/unitalogistiche")
     public List<UnitaLogisticheDettaglio> getDettagliByUtente() {
