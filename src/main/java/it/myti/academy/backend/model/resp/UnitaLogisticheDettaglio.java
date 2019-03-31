@@ -6,9 +6,7 @@ import it.myti.academy.backend.model.Spedizione;
 import it.myti.academy.backend.model.StatoUnitaLogistica;
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by david at 2019-03-11

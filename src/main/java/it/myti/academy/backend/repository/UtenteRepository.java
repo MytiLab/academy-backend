@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 /**
  * Created by david at 2019-02-20
  */
+@Repository
 public interface UtenteRepository extends JpaRepository<Utente, Long> {
 }
