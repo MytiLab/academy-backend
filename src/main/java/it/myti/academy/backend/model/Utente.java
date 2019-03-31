@@ -15,7 +15,7 @@ public class Utente {
 
     @Id
     @Column(updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     @Column(unique = true, length = 64)

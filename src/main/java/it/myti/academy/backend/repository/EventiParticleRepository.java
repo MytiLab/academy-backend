@@ -4,6 +4,8 @@ import it.myti.academy.backend.model.EventoParticle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by david at 2019-03-11
  */
