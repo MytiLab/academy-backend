@@ -1,6 +1,7 @@
 package it.myti.academy.backend.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -12,6 +13,7 @@ import javax.persistence.Table;
  */
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @DiscriminatorValue("2")
 @Table(name = "eventi_hannibal")
