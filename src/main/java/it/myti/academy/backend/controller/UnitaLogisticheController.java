@@ -3,17 +3,19 @@ package it.myti.academy.backend.controller;
 import it.myti.academy.backend.model.Collo;
 import it.myti.academy.backend.model.EventoParticle;
 import it.myti.academy.backend.model.UnitaLogistica;
+import it.myti.academy.backend.model.Utente;
 import it.myti.academy.backend.model.resp.UnitaLogisticheDettaglio;
 import it.myti.academy.backend.repository.EventiParticleRepository;
+import it.myti.academy.backend.repository.UtenteRepository;
 import it.myti.academy.backend.service.ColloService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -24,15 +26,18 @@ public class UnitaLogisticheController {
 
     @Autowired
     public ColloService colloService;
-
     @Autowired
     public EventiParticleRepository eventiParticleRepository;
-    private Function<Collo, UnitaLogisticheDettaglio> colloToDetail;
+    @Autowired
+    private UtenteRepository utenteRepository;
 
-    @GetMapping("/unitalogistiche/utente/{id}")
-    public List<UnitaLogisticheDettaglio> getDettagliByUtente(@PathVariable("id") long id) {
+    @GetMapping("/unitalogistiche")
+    public List<UnitaLogisticheDettaglio> getDettagliByUtente() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        Utente user = utenteRepository.findByUsername(currentPrincipalName);
 
-        final List<Collo> spedizioniAttiveByUtente = colloService.getSpedizioniAttiveByUtente(id);
+        final List<Collo> spedizioniAttiveByUtente = colloService.getSpedizioniAttiveByUtente(user.getId());
 
         final List<UnitaLogisticheDettaglio> collect = spedizioniAttiveByUtente.stream()
                 .map(c -> colloToDetails(c))
